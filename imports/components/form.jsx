@@ -16,6 +16,7 @@ import {DialogContext} from '../index';
 
 import {Thanks} from './thanks';
 import { Context as AnaliticsContext } from '../package/analitics';
+import {getCookie} from "../startup/helpers";
 
 
 const useStyle = makeStyles(theme => ({
@@ -43,9 +44,22 @@ export const Form = ({}) => {
     setDialog({open: !open});
   }
 
-  const onThanks = () => {
-    setDialog({thanks: !thanks});
-    trigger('thanks');
+  const onThanks = (e) => {
+    e.preventDefault();
+    const options = {
+        name: this.contactName.value.trim() || 'Гость',
+        phone: this.contacPhone.value.trim(),
+        pixelId: getCookie('__opix_uid'),
+    };
+
+    Meteor.call('leads.insert', options, (err, res) => {
+      if (err) {
+        console.log(err);
+      } else {
+        setDialog({thanks: !thanks});
+        trigger('thanks');
+      }
+    })
   }
 
   return(
@@ -59,7 +73,7 @@ export const Form = ({}) => {
         </IconButton>
         { thanks 
         ? <Thanks />
-        : <>
+        : <form onSubmit={onThanks}>
           <DialogContent style={{padding: '112px 112px 32px 112px', boxSizing: 'border-box'}}>
             {title}
             <Typography variant='body1' component="p" align='center' gutterBottom>Введите свое имя и телефон</Typography>
@@ -71,20 +85,24 @@ export const Form = ({}) => {
                 type="text"
                 fullWidth
                 margin="normal"
+                inputRef={c => this.contactName = c}
               />
               <TextField
                 id="phone"
                 label="Телефон"
-                type="phone"
+                type="text"
                 fullWidth
                 style={{marginTop: 60}}
+                inputRef={c => this.contacPhone = c}
+                inputProps={{pattern: "[+]?(\\d[-\\(\\)\\s]*){11}"}}
+                required
               />
             </div>
           </DialogContent>
           <DialogActions style={{padding: 112}}>
-            <Button fullWidth variant="contained" color="primary" size="large" onClick={onThanks}>{bottom}</Button>
+            <Button fullWidth variant="contained" color="primary" size="large" type="submit">{bottom}</Button>
           </DialogActions>
-        </>}
+        </form>}
       </Dialog>
     </>
   )
