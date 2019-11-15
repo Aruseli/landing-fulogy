@@ -108,7 +108,7 @@ export const ScreenThree = () => {
       <div style={{position: 'relative', padding: '0 48px'}}>
         <div className={classes.dottedLineStyle} />
         <Typography variant="h4" component='h2' align='center' style={{paddingTop: 64}}>
-        чтобы задать вопрос или рассчитать стоимость</Typography>
+        чтобы задать вопрос или оставить заявку</Typography>
         <Typography variant="body1" component='p' align='center' style={{paddingBottom: 64}}>
         нажмите на кнопку ниже:</Typography>
         <Grid display='column' container justify='center' alignItems='center' spacing={10}>
