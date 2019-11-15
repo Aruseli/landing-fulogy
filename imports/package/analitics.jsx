@@ -114,6 +114,7 @@ export const AnaliticsProvider = ({
           accurateTrackBounce: true,
           webvisor: true,
           trackHash: true,
+          triggerEvent: true,
           userParams: {
             userId: localStorage.getItem('userId'),
           },

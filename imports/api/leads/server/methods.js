@@ -34,7 +34,7 @@ Meteor.methods({
 
         try {
             Email.send({
-                to: 'info@smart-dimmer.com',
+                to: 'info@fulogy.com',
                 from: 'Интернет магазин fulogy.com <info@fulogy.com>',
                 subject: 'Заявка с промо-страницы led.fulogy.com',
                 text: 'Это письмо сформировано автоматически от лица ' + options.name + '. \r\n' +
@@ -56,6 +56,7 @@ Meteor.methods({
                 comment: "",
                 createdAt: now,
                 changedAt: now,
+                page: options.page,
                 pixelId: options.pixelId,
             };
 

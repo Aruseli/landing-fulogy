@@ -136,7 +136,7 @@ export const ScreenSeven = () => {
           <img src='/icon/up-broken-line-arrow-right.svg' alt='стрелочка' className={classes.arrowStyles2}/>
           <Typography variant='h5' component='h2' align='center' style={{paddingTop: 64}} gutterBottom>гарантия 5 лет</Typography>
           <Container style={{paddingRight: 48}}>
-            <Typography variant='body1' component='p'>Мы даем письменну гарантию качества на светильник сроком на 5 лет 
+            <Typography variant='body1' component='p'>Мы даем письменную гарантию качества на светильник сроком на 5 лет
               и гарантию на монтажные работы также на 5 лет.
             </Typography>
           </Container>

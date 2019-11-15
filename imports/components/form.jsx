@@ -49,6 +49,7 @@ export const Form = ({}) => {
     const options = {
         name: this.contactName.value.trim() || 'Гость',
         phone: this.contacPhone.value.trim(),
+        page: document.location && (document.location.origin + document.location.pathname),
         pixelId: getCookie('__opix_uid'),
     };
 
@@ -58,6 +59,7 @@ export const Form = ({}) => {
       } else {
         setDialog({thanks: !thanks});
         trigger('thanks');
+        if (window.opix) window.opix('event', 'reachGoal', {goal: 'make_request'});
       }
     })
   }
