@@ -63,10 +63,10 @@ export const App = () => {
 
   return (
     <AnaliticsProvider
-      facebookPixel={'1245714662288364'}
-      facebookTimeout={20000}
-      googleAnalitics={'UA-56824740-6'}
-      yandexMetrika={56224693}
+      facebookPixel={null}
+      facebookTimeout={null}
+      googleAnalitics={null}
+      yandexMetrika={56290021}
     >
       <ThemeProvider theme={theme}>
         <DialogContextProvider>
