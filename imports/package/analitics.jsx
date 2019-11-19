@@ -9,10 +9,6 @@ import ReactGA from 'react-ga';
 var Chance = require('chance');
 var chance = new Chance();
 
-export const generateUserId = () => {
-  return `${new Date().valueOf()}${chance.fbid()}`;
-};
-
 export const Context = createContext({});
 
 /**
@@ -69,10 +65,6 @@ export const AnaliticsProvider = ({
 
   useEffect(() => {
     if (Meteor.isServer || !pathname) return;
-
-    if (!localStorage.getItem('_analiticsUserId')) {
-      localStorage.setItem('_analiticsUserId', generateUserId());
-    }
     
     setTimeout(() => {
       setFacebookReady(true);
@@ -89,11 +81,7 @@ export const AnaliticsProvider = ({
     }, facebookTimeout); 
 
     if (googleAnalitics) {
-      ReactGA.initialize(googleAnalitics, {
-        gaOptions: {
-          userId: localStorage.getItem('_analiticsUserId'),
-        },
-      });
+      ReactGA.initialize(googleAnalitics);
     }
   }, []);
 
@@ -119,9 +107,6 @@ export const AnaliticsProvider = ({
           webvisor: true,
           triggerEvent: true,
           trackHash: true,
-          userParams: {
-            userId: localStorage.getItem('userId'),
-          },
         }}
         version="2"
       />}
