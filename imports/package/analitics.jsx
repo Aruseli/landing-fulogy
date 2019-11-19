@@ -44,18 +44,22 @@ export const AnaliticsProvider = ({
         googleAnalitics,
         yandexMetrika,
         trigger: (action, data) => {
+          console.log('trigger', { action, data, facebookPixel, googleAnalitics, yandexMetrika, });
           try {
-            if (googleAnalitics)
+            if (googleAnalitics) {
               ReactGA.event({
                 category: 'actions',
                 action,
                 value: data ? data.value : undefined,
               });
+            }
+          } catch (error) { console.error(error); }
+          try {
             if (yandexMetrika) ya('reachGoal', action, data);
+          } catch (error) { console.error(error); }
+          try {
             if (facebookPixel && facebookReady) ReactPixel.trackCustom(action, data);
-          } catch (error) {
-            console.error(error);
-          }
+          } catch (error) { console.error(error); }
         },
       }}
     >
@@ -113,6 +117,7 @@ export const AnaliticsProvider = ({
           trackLinks: true,
           accurateTrackBounce: true,
           webvisor: true,
+          triggerEvent: true,
           trackHash: true,
           userParams: {
             userId: localStorage.getItem('userId'),
