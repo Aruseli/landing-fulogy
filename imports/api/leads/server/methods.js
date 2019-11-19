@@ -25,23 +25,25 @@ Meteor.methods({
         check([/*options.response,*/ options.phone], [NonEmptyString]);
         this.unblock();
 
-        if (!Meteor.isProduction) { //применим API Стандартизации для Production
+        if (Meteor.isProduction) { //применим API Стандартизации для Production
             const res = Meteor.call('dadata.clean', 'phone', [options.phone]);
             if (res.length) {
                 options.phone = res[0].phone;
             }
         }
 
-        try {
-            Email.send({
-                to: 'info@fulogy.com',
-                from: 'Интернет магазин fulogy.com <info@fulogy.com>',
-                subject: 'Заявка с промо-страницы led.fulogy.com',
-                text: 'Это письмо сформировано автоматически от лица ' + options.name + '. \r\n' +
-                    'Телефон: ' + options.phone + '. \r\n',
-            });
-        } catch (err) {
-            throw new Meteor.Error('SMTP', err.toString(), err.data);
+        if (Meteor.isProduction) {
+            try {
+                Email.send({
+                    to: 'info@fulogy.com',
+                    from: 'Интернет магазин fulogy.com <info@fulogy.com>',
+                    subject: 'Заявка с промо-страницы led.fulogy.com',
+                    text: 'Это письмо сформировано автоматически от лица ' + options.name + '. \r\n' +
+                        'Телефон: ' + options.phone + '. \r\n',
+                });
+            } catch (err) {
+                throw new Meteor.Error('SMTP', err.toString(), err.data);
+            }
         }
 
         const leadInDB = Leads.findOne({phone: options.phone, 'state.index': 0});
