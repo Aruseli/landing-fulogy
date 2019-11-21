@@ -104,7 +104,7 @@ export const ScreenSeven = () => {
   const { trigger } = useContext(AnaliticsContext);
   const {setDialog, open} = useContext(DialogContext);
 
-  const handlerEvent = (openEvent, thaksName, config) => () => {
+  const handlerEvent = (openEvent, thanksName, config) => () => {
     trigger(openEvent);
     setDialog({ 
       ...config,
