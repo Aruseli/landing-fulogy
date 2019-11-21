@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 
 import {DialogContext} from '../index';
+import { Context as AnaliticsContext } from '../package/analitics';
 
 const useStyle = makeStyles(theme => ({
   pinkBlock: {
@@ -32,13 +33,17 @@ const useStyle = makeStyles(theme => ({
 
 export const ScreenOne = () => {
   const classes = useStyle();
+  const { trigger } = useContext(AnaliticsContext);
   const {setDialog, open} = useContext(DialogContext);
 
-  const handlerEvent = () => setDialog({ 
-    open: !open, 
-    title: <Typography variant='h3' component="h1" align='center'>чтобы заказать звонок</Typography>,
-    bottom: <>Заказать звонок</>
-  });
+  const handlerEvent = (on, tn, config) => () => {
+    trigger(on);
+    setDialog({ 
+      ...config,
+      open: !open, 
+      onThanksHandler: (trigger) => (trigger(tn), trigger('thanks')),
+    })
+  };
 
   return (
     <>
@@ -66,7 +71,10 @@ export const ScreenOne = () => {
                   fontSize: 34}}>8 800 505-65-33</a>
               </Grid>
               <Grid item style={{paddingRight: 35}}>
-                <Button variant="outlined" size="small" onClick={handlerEvent}>Заказать звонок</Button>
+                <Button variant="outlined" size="small" onClick={handlerEvent('callback', 'thanksCallback', {
+                  title: <Typography variant='h3' component="h1" align='center'>чтобы заказать звонок</Typography>,
+                  bottom: <>Заказать звонок</>,
+                })}>Заказать звонок</Button>
               </Grid>
             </Grid>
           </Grid> 
@@ -98,7 +106,10 @@ export const ScreenOne = () => {
           width: '100%'
         }}>
         <Grid item>
-          <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent}>Рассчитать стоимость</Button>
+          <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent('', {
+            title: <Typography variant='h3' component="h1" align='center'>чтобы pассчитать стоимость</Typography>,
+            bottom: <>Рассчитать стоимость</>,
+          })}>Рассчитать стоимость</Button>
         </Grid>
       </Grid>
     </>
