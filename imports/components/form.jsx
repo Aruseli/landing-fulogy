@@ -38,10 +38,13 @@ const useStyle = makeStyles(theme => ({
 export const Form = ({}) => {
   const classes = useStyle();
   const { trigger } = useContext(AnaliticsContext);
-  const {setDialog, title, open, bottom, thanks} = useContext(DialogContext);
+  const {setDialog, title, open, bottom, thanks, onThanksHandler, event} = useContext(DialogContext);
   
   const onClick = () => {
-    setDialog({open: !open});
+    setDialog({
+      open: !open,
+      onThanksHandler: null
+    });
   }
 
   const onThanks = (e) => {
@@ -59,6 +62,7 @@ export const Form = ({}) => {
       } else {
         setDialog({thanks: !thanks});
         trigger('thanks');
+        if (onThanksHandler) onThanksHandler(trigger);
         if (window.opix) window.opix('event', 'reachGoal', {goal: 'make_request'});
       }
     })

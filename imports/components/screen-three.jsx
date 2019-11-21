@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 
 import {DialogContext} from '../index';
+import { Context as AnaliticsContext } from '../package/analitics';
 
 const useStyle = makeStyles(theme => ({
   redLineStyle: {
@@ -67,12 +68,17 @@ const useStyle = makeStyles(theme => ({
 
 export const ScreenThree = () => {
   const classes = useStyle();
+  const { trigger } = useContext(AnaliticsContext);
   const {setDialog, open} = useContext(DialogContext);
 
-  const handlerEvent = (config) => () => setDialog({ 
-    ...config,
-    open: !open, 
-  });
+  const handlerEvent = (openEvent, thanksName, config) => () => { 
+    trigger(openEvent);
+    setDialog({ 
+      ...config,
+      open: !open, 
+      onThanksHandler: (trigger) => (trigger(thanksName), trigger('thanks')),
+    }) 
+  };
   
   return(
     <>
@@ -113,19 +119,19 @@ export const ScreenThree = () => {
         нажмите на кнопку ниже:</Typography>
         <Grid display='column' container justify='center' alignItems='center' spacing={10}>
           <Grid item xs={9}>
-            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent({
+            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent('request1', 'thanksRequest1', {
               title: <Typography variant='h3' component="h1" align='center'>чтобы оставить заявку</Typography>,
               bottom: <>Оставить заявку</>
             })}>Оставить заявку</Button>
           </Grid>
           <Grid item xs={9}>
-            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent({
+            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent('question1', 'thanksQuestion1', {
               title: <Typography variant='h3' component="h1" align='center'>чтобы задать вопрос</Typography>,
               bottom: <>Задать вопрос</>
             })}>Задать вопрос</Button>
           </Grid>
           <Grid item xs={9}>
-            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent({
+            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent('callback2', 'thanksCallback2', {
               title: <Typography variant='h3' component="h1" align='center'>чтобы заказать звонок</Typography>,
               bottom: <>Заказать звонок</>
             })}>Заказать звонок</Button>

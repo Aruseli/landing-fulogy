@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 import {DialogContext} from '../index';
+import { Context as AnaliticsContext } from '../package/analitics';
 
 const useStyle = makeStyles(theme => ({
   handBlockStyle: {
@@ -101,13 +102,17 @@ const useStyle = makeStyles(theme => ({
 
 export const ScreenFour = () => {
   const classes = useStyle();
+  const { trigger } = useContext(AnaliticsContext);
   const {setDialog, open} = useContext(DialogContext);
 
-  const handlerEvent = () => setDialog({ 
-    open: !open,
-    title: <Typography variant='h3' component="h1" align='center'>чтобы рассчитать стоимость светильника</Typography>,
-    bottom: <>Рассчитать стоимость</>
-  });   
+  const handlerEvent = (openEvent, thanksName, config) => () => {
+    trigger(openEvent);
+    setDialog({ 
+      ...config,
+      open: !open,
+      onThanksHandler: (trigger) => (trigger(thanksName), trigger('thanks')),
+    });
+  };   
   
   return(
     <>
@@ -155,7 +160,10 @@ export const ScreenFour = () => {
           alignItems='center'
         >
           <Grid item xs={9}>
-            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent}>Рассчитать стоимость</Button>
+            <Button fullWidth variant="contained" color="primary" size="large" onClick={handlerEvent('calculation2', 'thanksCalculation2', {
+              title: <Typography variant='h3' component="h1" align='center'>чтобы рассчитать стоимость светильника</Typography>,
+              bottom: <>Рассчитать стоимость</>,
+            })}>Рассчитать стоимость</Button>
           </Grid>
         </Grid>
       </div>

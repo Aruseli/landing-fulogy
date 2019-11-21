@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
 import {
   makeStyles, 
@@ -7,6 +7,7 @@ import {
   Button,
   Grid
 } from '@material-ui/core';
+import { Context as AnaliticsContext } from '../package/analitics';
 
 const useStyle = makeStyles(theme => ({
   redLineStyle: {
@@ -98,6 +99,11 @@ const useStyle = makeStyles(theme => ({
 
 export const ScreenNine = () => {
   const classes = useStyle();
+  const { trigger } = useContext(AnaliticsContext);
+
+  const onClick = () => {
+    trigger('quiz');
+  }
   
   return(
     <>
@@ -129,7 +135,7 @@ export const ScreenNine = () => {
       alignItems='center'
     >
       <Grid item xs={9}>
-        <Button fullWidth variant="contained" color="primary" size="large" href='https://constructor.fulogy.com/quiz' target='_blank'>Пройти тест</Button>
+        <Button fullWidth variant="contained" color="primary" size="large" href='https://constructor.fulogy.com/quiz' target='_blank' onClick={onClick}>Пройти тест</Button>
       </Grid>
     </Grid>
     </>  

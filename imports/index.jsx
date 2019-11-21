@@ -44,7 +44,8 @@ export const DialogContextProvider = ({ children }) => {
     open: false,
     title: <Typography variant='h3' component="h1" align='center'>чтобы рассчитать стоимость светильника</Typography>,
     bottom: <>Рассчитать стоимость</>,
-    thanks: false
+    thanks: false,
+    onThanksHandler: null,
   });
 
   const setDialog = (config) => {
