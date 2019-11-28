@@ -11,7 +11,7 @@ import {
   Button
 } from '@material-ui/core';
 
-import {Close} from '@material-ui/icons';
+import Close from '@material-ui/icons/Close';
 import {DialogContext} from '../index';
 
 import {Thanks} from './thanks';
@@ -80,7 +80,7 @@ export const Form = ({}) => {
         { thanks 
         ? <Thanks />
         : <form onSubmit={onThanks}>
-          <DialogContent style={{padding: '112px 112px 32px 112px', boxSizing: 'border-box'}}>
+          <DialogContent style={{padding: '112px 112px 16px 112px', boxSizing: 'border-box'}}>
             {title}
             <Typography variant='body1' component="p" align='center' gutterBottom>Введите свое имя и телефон</Typography>
             <div style={{paddingTop: 48}}>

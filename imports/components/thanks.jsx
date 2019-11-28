@@ -6,7 +6,7 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import {Close} from '@material-ui/icons';
+import Close from '@material-ui/icons/Close';
 
 
 const useStyle = makeStyles(theme => ({
@@ -32,7 +32,7 @@ export const Thanks = ({onClick, open}) => {
 
   return(
     <>
-      <DialogContent style={{padding: '112px 112px 32px 112px', boxSizing: 'border-box'}}>
+      <DialogContent style={{padding: '112px 112px 16px 112px', boxSizing: 'border-box'}}>
         <Typography variant='h5' component="h1" align='center'>спасибо за заявку</Typography>
         <Typography variant='body1' component="p" align='center' gutterBottom>В ближайшее время мы с Вами свяжемся</Typography>
       </DialogContent>

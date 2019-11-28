@@ -3,12 +3,15 @@ import React, {useState} from 'react';
 import { Switch, Route } from 'react-router';
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import {Typography} from '@material-ui/core';
+import {
+  Typography, 
+  useMediaQuery,
+} from '@material-ui/core';
 
 import { AnaliticsProvider } from './package/analitics';
 
 import {Form} from './components/form';
-import {theme} from '../theme';
+import {theme} from '../themes/theme';
 import {ScreenOne} from './components/screen-one';
 import {ScreenTwo} from './components/screen-two';
 import {ScreenThree} from './components/screen-three';
@@ -61,6 +64,7 @@ export const DialogContextProvider = ({ children }) => {
 };
 
 export const App = () => {
+  // const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <AnaliticsProvider
