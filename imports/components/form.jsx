@@ -63,7 +63,7 @@ export const Form = ({}) => {
         setDialog({thanks: !thanks});
         trigger('thanks');
         if (onThanksHandler) onThanksHandler(trigger);
-        if (window.opix) window.opix('event', 'reachGoal', {goal: 'make_request'});
+        //if (window.opix) window.opix('event', 'reachGoal', {goal: 'make_request'});
       }
     })
   }

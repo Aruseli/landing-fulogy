@@ -45,6 +45,7 @@ export const AnaliticsProvider = ({
         yandexMetrika,
         trigger: (action, data) => {
           try {
+            if (window.opix) window.opix('event', 'reachGoal', {goal: action});
             if (googleAnalitics)
               ReactGA.event({
                 category: 'actions',
