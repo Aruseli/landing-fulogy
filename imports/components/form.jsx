@@ -55,8 +55,8 @@ export const Form = ({}) => {
   const onThanks = (e) => {
     e.preventDefault();
     const options = {
-        name: this.contactName.value.trim() || 'Гость',
-        phone: this.contacPhone.value.trim(),
+        name: this.contactName.value.trim() || this.contactNameMob.value.trim() || 'Гость',
+        phone: this.contacPhone.value.trim() || this.contacPhoneMob.value.trim(),
         page: document.location && (document.location.origin + document.location.pathname),
         pixelId: getCookie('__opix_uid'),
     };
@@ -136,14 +136,14 @@ export const Form = ({}) => {
                   type="text"
                   fullWidth
                   margin="normal"
-                  inputRef={c => this.contactName = c}
+                  inputRef={c => this.contactNameMob = c}
                 />
                 <TextField
                   id="phone"
                   label="Телефон"
                   type="phone"
                   fullWidth
-                  inputRef={c => this.contacPhone = c}
+                  inputRef={c => this.contacPhoneMob = c}
                   inputProps={{pattern: "[+]?(\\d[-\\(\\)\\s]*){11}"}}
                   required
               />
