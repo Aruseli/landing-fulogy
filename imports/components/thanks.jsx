@@ -32,9 +32,9 @@ export const Thanks = ({onClick, open}) => {
 
   return(
     <>
-      <DialogContent style={{padding: '112px 112px 16px 112px', boxSizing: 'border-box'}}>
-        <Typography variant='h5' component="h1" align='center'>спасибо за заявку</Typography>
-        <Typography variant='body1' component="p" align='center' gutterBottom>В ближайшее время мы с Вами свяжемся</Typography>
+      <DialogContent style={{padding: 32, boxSizing: 'border-box'}}>
+        <Typography variant='h5' component="h1" align='center' gutterBottom>спасибо за заявку</Typography>
+        <Typography variant='body1' component="p" align='center'>В ближайшее время мы с Вами свяжемся</Typography>
       </DialogContent>
     </>
   )

@@ -174,7 +174,7 @@ export const ScreenNine = () => {
               borderRadius: 10
             }} square elevation={5}>
               <Typography variant='body1' component='p' align='center'>Пройдите тест из&ensp;
-                <Typography variant='body2' component='span'>6 вопросов за 2 минуты</Typography>&ensp;
+                <Typography variant='body2' component='span'>8 вопросов за 1 минуту</Typography>&ensp;
                 и получите<br />
                 <Typography variant='h5' component='span'>скидку 20%</Typography>&ensp;на оригинальный светильник от компании&ensp;
                 <Typography variant='body2' component='span' style={{color: '#252049'}}>Fulogy</Typography>&ensp;
