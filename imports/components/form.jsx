@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 
 import {
   makeStyles,  
@@ -44,7 +44,9 @@ export const Form = ({}) => {
   const classes = useStyle();
   const { trigger } = useContext(AnaliticsContext);
   const {setDialog, title, open, bottom, thanks, onThanksHandler, event} = useContext(DialogContext);
-  
+  const [nameValue, setNameValue] = useState('');
+  const [phoneValue, setPhoneValue] = useState('');
+
   const onClick = () => {
     setDialog({
       open: !open,
@@ -55,8 +57,8 @@ export const Form = ({}) => {
   const onThanks = (e) => {
     e.preventDefault();
     const options = {
-        name: this.contactName.value.trim() || this.contactNameMob.value.trim() || 'Гость',
-        phone: this.contacPhone.value.trim() || this.contacPhoneMob.value.trim(),
+        name: nameValue || 'Гость',
+        phone: phoneValue,
         page: document.location && (document.location.origin + document.location.pathname),
         pixelId: getCookie('__opix_uid'),
     };
@@ -91,6 +93,8 @@ export const Form = ({}) => {
               <Typography variant='body1' component="p" align='center' gutterBottom>Введите свое имя и телефон</Typography>
               <div style={{paddingTop: 16}}>
               <TextField
+                onChange={(e) => setNameValue(e.target.value)}
+                value={nameValue}
                 autoFocus
                 id="name"
                 label="Имя"
@@ -100,11 +104,12 @@ export const Form = ({}) => {
                 inputRef={c => this.contactName = c}
               />
               <TextField
+                onChange={(e) => setPhoneValue(e.target.value)}
+                value={phoneValue}
                 id="phone"
                 label="Телефон"
                 type="text"
                 fullWidth
-                inputRef={c => this.contacPhone = c}
                 inputProps={{pattern: "[+]?(\\d[-\\(\\)\\s]*){11}"}}
                 required
                 />
@@ -130,20 +135,22 @@ export const Form = ({}) => {
               <Typography variant='body1' component="p" align='center' gutterBottom>Введите свое имя и телефон</Typography>
               <div style={{paddingTop: 48}}>
                 <TextField
+                  onChange={(e) => setNameValue(e.target.value)}
+                  value={nameValue}
                   autoFocus
                   id="name"
                   label="Имя"
                   type="text"
                   fullWidth
                   margin="normal"
-                  inputRef={c => this.contactNameMob = c}
                 />
                 <TextField
+                  onChange={(e) => setPhoneValue(e.target.value)}
+                  value={phoneValue}
                   id="phone"
                   label="Телефон"
                   type="phone"
                   fullWidth
-                  inputRef={c => this.contacPhoneMob = c}
                   inputProps={{pattern: "[+]?(\\d[-\\(\\)\\s]*){11}"}}
                   required
               />
