@@ -85,7 +85,6 @@ export const ScreenOne = () => {
 
   return (
     <>
-      <div style={{backgroundColor: '#ff0000', fontSize: 24, textTransform: 'uppercase', fontWeight: 300, color: '#fff', textAlign: 'center', padding: '16px 0'}}>только до нового года скидка 20%</div>
       <div className={classes.divHeaderPaddingsMargins}>
         <Grid
           container
