@@ -66,7 +66,7 @@ export const App = () => {
       facebookPixel={null}
       facebookTimeout={null}
       googleAnalitics={null}
-      yandexMetrika={56290021}
+      yandexMetrika={null}
     >
       <ThemeProvider theme={theme}>
         <DialogContextProvider>
