@@ -9,10 +9,6 @@ import ReactGA from 'react-ga';
 var Chance = require('chance');
 var chance = new Chance();
 
-export const generateUserId = () => {
-  return `${new Date().valueOf()}${chance.fbid()}`;
-};
-
 export const Context = createContext({});
 
 /**
@@ -44,6 +40,7 @@ export const AnaliticsProvider = ({
         googleAnalitics,
         yandexMetrika,
         trigger: (action, data) => {
+          console.log('trigger', { action, data, facebookPixel, googleAnalitics, yandexMetrika, });
           try {
             if (window.opix) window.opix('event', 'reachGoal', {goal: action});
             if (googleAnalitics)
@@ -52,11 +49,14 @@ export const AnaliticsProvider = ({
                 action,
                 value: data ? data.value : undefined,
               });
+            }
+          } catch (error) { console.error(error); }
+          try {
             if (yandexMetrika) ya('reachGoal', action, data);
+          } catch (error) { console.error(error); }
+          try {
             if (facebookPixel && facebookReady) ReactPixel.trackCustom(action, data);
-          } catch (error) {
-            console.error(error);
-          }
+          } catch (error) { console.error(error); }
         },
       }}
     >
@@ -66,10 +66,6 @@ export const AnaliticsProvider = ({
 
   useEffect(() => {
     if (Meteor.isServer || !pathname) return;
-
-    if (!localStorage.getItem('_analiticsUserId')) {
-      localStorage.setItem('_analiticsUserId', generateUserId());
-    }
     
     setTimeout(() => {
       setFacebookReady(true);
@@ -86,11 +82,7 @@ export const AnaliticsProvider = ({
     }, facebookTimeout); 
 
     if (googleAnalitics) {
-      ReactGA.initialize(googleAnalitics, {
-        gaOptions: {
-          userId: localStorage.getItem('_analiticsUserId'),
-        },
-      });
+      ReactGA.initialize(googleAnalitics);
     }
   }, []);
 
@@ -114,6 +106,7 @@ export const AnaliticsProvider = ({
           trackLinks: true,
           accurateTrackBounce: true,
           webvisor: true,
+          triggerEvent: true,
           trackHash: true,
           triggerEvent: true,
           userParams: {
