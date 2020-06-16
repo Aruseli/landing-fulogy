@@ -62,17 +62,6 @@ export const Form = ({}) => {
         page: document.location && (document.location.origin + document.location.pathname),
         pixelId: getCookie('__opix_uid'),
     };
-
-    Meteor.call('leads.insert', options, (err, res) => {
-      if (err) {
-        console.log(err);
-      } else {
-        setDialog({thanks: !thanks});
-        trigger('thanks');
-        if (onThanksHandler) onThanksHandler(trigger);
-        //if (window.opix) window.opix('event', 'reachGoal', {goal: 'make_request'});
-      }
-    })
   }
 
   return(
