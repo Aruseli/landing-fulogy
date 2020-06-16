@@ -77,7 +77,7 @@ export const App = () => {
         <DialogContextProvider>
           <Form />
           <Switch>
-            <Route path='/podsvetka-dlya-kuhni-1' component={Index} />
+            <Route path='/' component={Index} />
           </Switch>
         </DialogContextProvider>
       </ThemeProvider>
