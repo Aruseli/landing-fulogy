@@ -3,12 +3,15 @@ import React, {useState} from 'react';
 import { Switch, Route } from 'react-router';
 
 import { ThemeProvider } from '@material-ui/core/styles';
-import {Typography} from '@material-ui/core';
+import {
+  Typography, 
+  useMediaQuery,
+} from '@material-ui/core';
 
 import { AnaliticsProvider } from './package/analitics';
 
 import {Form} from './components/form';
-import {theme} from '../theme';
+import {theme} from '../themes/theme';
 import {ScreenOne} from './components/screen-one';
 import {ScreenTwo} from './components/screen-two';
 import {ScreenThree} from './components/screen-three';
@@ -44,7 +47,8 @@ export const DialogContextProvider = ({ children }) => {
     open: false,
     title: <Typography variant='h3' component="h1" align='center'>чтобы рассчитать стоимость светильника</Typography>,
     bottom: <>Рассчитать стоимость</>,
-    thanks: false
+    thanks: false,
+    onThanksHandler: null,
   });
 
   const setDialog = (config) => {
@@ -60,13 +64,14 @@ export const DialogContextProvider = ({ children }) => {
 };
 
 export const App = () => {
+  // const isMdUp = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <AnaliticsProvider
-      facebookPixel={null}
-      facebookTimeout={null}
-      googleAnalitics={null}
-      yandexMetrika={null}
+      facebookPixel={Meteor.isProduction ? null : null}
+      facebookTimeout={Meteor.isProduction ? 20000 : null}
+      googleAnalitics={Meteor.isProduction ? null : null}
+      yandexMetrika={Meteor.isProduction ? 64733455 : null}
     >
       <ThemeProvider theme={theme}>
         <DialogContextProvider>

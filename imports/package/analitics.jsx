@@ -42,7 +42,8 @@ export const AnaliticsProvider = ({
         trigger: (action, data) => {
           console.log('trigger', { action, data, facebookPixel, googleAnalitics, yandexMetrika, });
           try {
-            if (googleAnalitics) {
+            if (window.opix) window.opix('event', 'reachGoal', {goal: action});
+            if (googleAnalitics)
               ReactGA.event({
                 category: 'actions',
                 action,
@@ -98,7 +99,7 @@ export const AnaliticsProvider = ({
   return (
     <>
       {content}
-      {(Meteor.isClient && !!yandexMetrika && !!pathname) && <YMInitializer
+      {(!!yandexMetrika && !!pathname) && <YMInitializer
         accounts={[yandexMetrika]}
         options={{
           clickmap: true,
@@ -107,6 +108,10 @@ export const AnaliticsProvider = ({
           webvisor: true,
           triggerEvent: true,
           trackHash: true,
+          triggerEvent: true,
+          userParams: {
+            userId: Meteor.isClient ? localStorage.getItem('userId') : null,
+          },
         }}
         version="2"
       />}

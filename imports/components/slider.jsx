@@ -16,15 +16,15 @@ const useStyle = makeStyles(theme => ({
   },
   redLineStyle: {
     backgroundColor: '#f37e78',
-    width: 80,
-    height: 7,
-    margin: 20
+    width: 32,
+    height: 3,
+    margin: 16
   },
   greyLineStyle: {
     backgroundColor: '#f3ebeb',
-    width: 80,
-    height: 7,
-    margin: 20
+    width: 32,
+    height: 3,
+    margin: 16
   },
 }))
 
@@ -37,8 +37,8 @@ export const Slider = ({ items = [] }) => {
 
   return(
     <>
-      <div style={{ overflow: 'hidden', height: 400 }}>
-        <div style={{position: 'relative', height: '100%', marginLeft: 107, marginRight: 107}}>
+      <div style={{ overflow: 'hidden', height: 200 }}>
+        <div style={{position: 'relative', height: '100%', marginLeft: 48, marginRight: 48}}>
           {items.map((item, i) => (
             <div key={item.id} className={classes.animation}
               style={{
@@ -67,7 +67,7 @@ export const Slider = ({ items = [] }) => {
         container 
         justify='center' 
         alignItems='center'
-        style={{marginTop: 50, paddingBottom: 50}}
+        style={{marginTop: 16, paddingBottom: 16}}
       >
         {items.map((item, i) => (
           <Grid item key={item.id}>

@@ -44,7 +44,7 @@ export const ChildrenResponsive = ({
         position: 'absolute',
         left: -((sizeIn.width - sizeOut.width) / 2),
         top: -((sizeIn.height - sizeOut.height) / 2),
-        transform: `scale(${w2}, ${h2})`,
+        transform: `scale(${w2 * 1.1}, ${h2 * 1.1})`,
         }}
       >
         <ReactResizeDetector handleWidth handleHeight onResize={onResizeIn} />

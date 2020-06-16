@@ -1,3 +1,5 @@
+import '../imports/startup/server/register-api'
+
 import React from 'react';
 import { renderToString } from "react-dom/server";
 

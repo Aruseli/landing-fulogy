@@ -15,3 +15,9 @@ onPageLoad(async sink => {
     document.getElementById("react-target")
   );
 });
+
+Meteor.startup(()=>{
+    if (Meteor.isProduction) {
+        
+    }
+});
