@@ -68,10 +68,10 @@ export const App = () => {
 
   return (
     <AnaliticsProvider
-      facebookPixel={Meteor.isProduction ? '1245714662288364' : null}
+      facebookPixel={Meteor.isProduction ? null : null}
       facebookTimeout={Meteor.isProduction ? 20000 : null}
-      googleAnalitics={Meteor.isProduction ? 'UA-56824740-6' : null}
-      yandexMetrika={Meteor.isProduction ? 56224693 : null}
+      googleAnalitics={Meteor.isProduction ? null : null}
+      yandexMetrika={Meteor.isProduction ? 64733455 : null}
     >
       <ThemeProvider theme={theme}>
         <DialogContextProvider>
