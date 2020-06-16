@@ -43,7 +43,7 @@ export const AnaliticsProvider = ({
           console.log('trigger', { action, data, facebookPixel, googleAnalitics, yandexMetrika, });
           try {
             if (window.opix) window.opix('event', 'reachGoal', {goal: action});
-            if (googleAnalitics)
+            if (googleAnalitics) {
               ReactGA.event({
                 category: 'actions',
                 action,
