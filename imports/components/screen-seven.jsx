@@ -89,8 +89,8 @@ const useStyle = makeStyles(theme => ({
   arrowStyles6: {
     position: 'absolute',
     width: 35,
-    right: -60,
-    transform: 'rotate(-86deg)',
+    right: '80%',
+    transform: 'rotate(-56deg)',
     top: 24
   },
   clipPathBlock: {
